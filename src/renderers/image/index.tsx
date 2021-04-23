@@ -6,6 +6,7 @@ export interface ImageBlockData {
     url: string;
     name?: string;
   };
+  url?: string;
   caption: string;
   withBorder: boolean;
   withBackground: boolean;
@@ -45,10 +46,12 @@ const Image = ({
   if (classNames.length > 0) {
     figureprops.className = classNames.join(' ');
   }
+  
+  const url = data?.url || data?.file?.url
 
   return (
     <figure {...figureprops}>
-      {data?.file?.url && <img src={data.file.url} alt={data.caption || data.file.name} />}
+      {url && <img src={url} alt={data.caption || data.file.name} />}
       {data.caption && <figcaption>{ReactHtmlParser(data.caption)}</figcaption>}
     </figure>
   );
